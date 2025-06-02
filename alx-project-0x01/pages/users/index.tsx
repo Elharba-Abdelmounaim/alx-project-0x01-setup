@@ -1,15 +1,33 @@
 import Header from "@/components/layout/Header";
+import UserCard from "@/components/common/UserCard";
+import { UserProps } from "@/interfaces";
 
-const UsersPage: React.FC = () => {
+interface UsersPageProps {
+  posts: UserProps[];
+}
+
+const Users: React.FC<UsersPageProps> = ({ posts }) => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-gray-100">
       <Header />
-      <div className="p-8">
-        <h2 className="text-3xl font-bold">Users Page</h2>
-        <p>This is the users page.</p>
-      </div>
-    </>
+      <main className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map((user) => (
+          <UserCard key={user.id} {...user} />
+        ))}
+      </main>
+    </div>
   );
 };
 
-export default UsersPage;
+export async function getStaticProps() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  const posts = await response.json();
+
+  return {
+    props: {
+      posts
+    }
+  };
+}
+
+export default Users;
