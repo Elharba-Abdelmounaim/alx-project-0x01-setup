@@ -1,12 +1,14 @@
-import React from 'react';
-import Button from '@/components/common/Button';
+import Header from "@/components/layout/Header";
 
 const UsersPage: React.FC = () => {
   return (
-    <div className="p-6">
-      <h1 className="text-3xl mb-4">Users</h1>
-      <Button label="Add User" />
-    </div>
+    <>
+      <Header />
+      <div className="p-8">
+        <h2 className="text-3xl font-bold">Users Page</h2>
+        <p>This is the users page.</p>
+      </div>
+    </>
   );
 };
 
